@@ -7,7 +7,6 @@ exit
 fi
 
 PARLI=/var/www/html/parli-n-grams
-PARLI=/Users/puntofisso/Dropbox/DEV/parli-n-grams/parli-n-grams
 HARV=$PARLI/harvester/
 PARS=$PARLI/parser/textoutput
 
@@ -20,10 +19,10 @@ $PARS/LORDSextract_all_text_from_year.sh $year $HARV $PARS
 echo "Aggregating text for year"
 $PARS/LORDSaggregateyear.sh $year $HARV $PARS
 
-exit
-
 echo "Running data mining"
 $PARS/LORDSword.sh $year $HARV $PARS
+
+exit
 
 echo "Updating DB"
 $PARS/LORDSupdateyeardb.sh $year $HARV $PARS
