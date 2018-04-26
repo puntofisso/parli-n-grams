@@ -5,7 +5,7 @@ PARS=$3
 
 TEXTDIR=LORDS0_totals
 OUTDIR=LORDSsaved
-FILE=total$year
+FILE=totalLORDS$year
 WORD2VEC=$PARS/word2vec
 
 
