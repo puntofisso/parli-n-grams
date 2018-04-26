@@ -11,6 +11,6 @@ mkdir -p $PARS/$year
 for i in `ls $HARV/hansard/debates$year*`
 do	
 	filename=`basename $i`
-	python2.7 $PARS/harvest.py $i > $PARS/$year/$filename.txt
+	python2.7 $PARS/harvest.py $i $HARV/hansard > $PARS/$year/$filename.txt
 done
 
