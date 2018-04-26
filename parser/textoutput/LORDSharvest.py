@@ -19,7 +19,7 @@ g4 = 0
 g5 = 0
 
 
-def main(argument):
+def main(argument, path):
 	global db
 	global start_time 
 	start_time = time.time()
@@ -462,5 +462,5 @@ def update_year_count(year):
 
 
 if __name__ =='__main__':
-	main(sys.argv[1])
+	main(sys.argv[1], sys.argv[2])
 
