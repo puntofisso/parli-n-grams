@@ -31,5 +31,5 @@ $PARS/updateyearcounts.sh $year $HARV $PARS
 echo "Updating lastupdate string"
 $PARS/lastupdated.sh
 
-echo "Shutting down"
-sudo shutdown -h now
+#echo "Shutting down"
+#sudo shutdown -h now
