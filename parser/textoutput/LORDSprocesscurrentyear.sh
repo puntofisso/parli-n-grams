@@ -10,7 +10,7 @@ PARLI=/var/www/html/parli-n-grams
 HARV=$PARLI/harvester/
 PARS=$PARLI/parser/textoutput
 
-echo "Updating Hansard..."
+echo "Updating Lords Hansard..."
 $HARV/updateLords.sh $HARV
 
 echo "Extracting text"
@@ -21,8 +21,6 @@ $PARS/LORDSaggregateyear.sh $year $HARV $PARS
 
 echo "Running data mining"
 $PARS/LORDSword.sh $year $HARV $PARS
-
-exit
 
 echo "Updating DB"
 $PARS/LORDSupdateyeardb.sh $year $HARV $PARS
