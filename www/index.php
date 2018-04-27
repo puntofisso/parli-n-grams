@@ -16,7 +16,8 @@ if (isset($_GET['ngrams'])) {
 
  <meta property="og:url" content="http://parli-n-grams.puntofisso.net/index.php"/>
       <meta property="og:title" content="Parli-N-Grams"/>
-      <!--meta property="og:image" content="myImage"/-->
+      <meta name="keywords", content="parliament,parli,data,opendata,politics,labour,conservative,conservatives,tories,tory,labour party,libdem,lib dem,libdems,lib dems,brexit,ukip,independence party,uk independence party,snp,scottish national party,nationalism,eu,european,european union,eurovision,eu referendum,referendum,russia,trump,obama,socialism"/>
+      <meta property="og:image" content="http://parli-n-grams.puntofisso.net/parli.PNG"/>
       <meta property="og:site_name" content="Parli-N-Grams" />
       <meta property="og:description" content="Parli-N-Grams"/>
 <link rel="stylesheet" href="boot/bootstrap.css" media="screen">
@@ -63,7 +64,7 @@ if (isset($_GET['ngrams'])) {
 		<div class="row">
 			<div class="col-lg-9">
 				<h1 class="tohide2">Parli-N-Grams</h1>
-				<p class="lead tohide2">What did they say?</p>
+				<p class="lead tohide2">Chart the frequency of words and phrases in UK Parliament debates</p>
 	
 
 				<div id="control">
@@ -116,7 +117,6 @@ if (isset($_GET['ngrams'])) {
 </div>
 
 
-<!--script src="boot/jquery-1.10.2.min.js"></script-->
 <script src="boot/dist/js/bootstrap.min.js"></script>
 <script src="boot/bootswatch.js"></script>
 
@@ -135,35 +135,15 @@ if (isset($_GET['ngrams'])) {
 
 	<script>
 
-new ShareButton({
-	title: "Parlingrams",
-	url: window.urltoshare,
-	description: "#hansard #parlingrams by @puntofisso",
-	networks: {
-	pinterest: {enabled: false},
-	linkedin: {enabled: false},
-	email: {enabled: false},
-	facebook: {app_id: "877912282306779"}
-	}
-});
-
 
 	var mpdict = {};
 
-	//mpdict["21294|21295|21296|21297|21298|21299|21300|21301|21302"] = "Margaret Thatcher";
-	//mpdict["47|736|1806|2432|2433|2434"] = "Tony Blair";
-	//mpdict["3014|3015|3016|408"] = "John Major";
-	//mpdict["2474|2475|2476|68|755|1997|40348"] = "Gordon Brown";
-	//mpdict["2574|2575|2576|133|819|1655|40334"] = "Jeremy Corbyn";
-	//mpdict["11955|11956|11957|11958|11959"] = "Clement Attlee";
-	//mpdict["28622|28623|28624|31571|31574|31577"] = "Winston Churchill";
-	//mpdict["29982|29983|29984|29985|29986|29987|29988|29989|29990|29991|29992"] = "Harold Wilson";
-	mpdict["all"] = "all MPs";
+	mpdict["commons"] = "House of Commons";
+	mpdict["lords"] = "House of Lords";
 		var receivedString = "<?php print $ngrams?>";
 		receivedString = receivedString.replace(/\+/g, ' ').replace(/%3A/g, ':').replace(/%7C/g, '|');
 		var receivedStringArray = receivedString.split(";");
 
-		//var onboot = <?php echo $onboot; ?>;
 		var startingNo = receivedStringArray.length;
 		var $node = "";
 
@@ -174,7 +154,7 @@ new ShareButton({
 			var this_mp = this_entry_arr[0];
 			var displayCount = varCount+1;
 
-			$node += '<p class="tohide"><label for="var'+displayCount+'">N-Gram '+displayCount+': </label><input type="text" value="'+ this_ngrams +'" class="ngraminput parli-form-control" name="var'+displayCount+'" id="var'+displayCount+'"></input> for ';
+			$node += '<p class="tohide"><label for="var'+displayCount+'">N-Gram '+displayCount+': </label><input type="text" value="'+ this_ngrams +'" class="ngraminput parli-form-control" name="var'+displayCount+'" id="var'+displayCount+'"></input> at the ';
 
 			$node += '<select id="select'+displayCount+'" class="ngramselect parli-form-control">';
 	
@@ -206,13 +186,12 @@ new ShareButton({
 		$('#addVar').on('click', function(event){
 			event.preventDefault();
 			varCount++;
-//			$node = '<p class="tohide"><label for="var'+varCount+'">N-Gram '+varCount+': </label><input type="text" class="ngraminput parli-form-control" name="var'+varCount+'" id="var'+varCount+'"></input> for <select id="select'+varCount+'" class="ngramselect parli-form-control"><option value="all">all MPs</option><option value="47|736|1806|2432|2433|2434">Tony Blair</option><option value="21294|21295|21296|21297|21298|21299|21300|21301|21302">Margaret Thatcher</option></select>&nbsp;<a href="#" class="btn btn-default" id="removeVar">-</a></p>';
 
-			 $node = '<p class="tohide"><label for="var'+varCount+'">N-Gram '+varCount+': </label><input type="text"class="ngraminput parli-form-control" name="var'+varCount+'" id="var'+varCount+'"></input> for ';
+			 $node = '<p class="tohide"><label for="var'+varCount+'">N-Gram '+varCount+': </label><input type="text"class="ngraminput parli-form-control" name="var'+varCount+'" id="var'+varCount+'"></input> at the ';
 
                       $node += '<select id="select'+varCount+'" class="ngramselect parli-form-control">';
 			$.each(mpdict, function(key, value) {
-					if (key == "all") {
+					if (key == "commons") {
 	                                        option = '<option value="'+key+'" selected>'+value+'</option>';
 					} else {
 	                                        option = '<option value="'+key+'">'+value+'</option>';
@@ -315,7 +294,6 @@ $('#reset').on('click', function(event) {
 		.datum(myData)
 		.call(chart);
 
-		//      .style({ 'width': 800, 'height':400 });
 
 		d3.selectAll("g.nv-line")
 		.on("click.mine", function(dataset){
@@ -347,6 +325,7 @@ $('#reset').on('click', function(event) {
 
 				allData.push({
 					key: series.key,
+					strokeWidth: 100.0,
 					value: lines.y()(point, pointIndex),
 					color: lines.color()(series,series.seriesIndex)
 				});
@@ -383,9 +362,6 @@ if (indexToHighlight !== null) {
 var term = searchNgram['key'];
 var year = Math.round(pointXValue);
 
-//$('#searchterm').empty();
-//$('#searchterm').append("Debates for <b>"+searchNgram['key']+"</b> in "+year);
-//showDebatesList(term,year);
 
 
 });
@@ -452,7 +428,7 @@ function extractData() {
 	});
 		$.ajax({
 
-			url: 'mysqlmp.php',
+			url: 'mysqlmplords.php',
 			data: "ngram="+entry+"&mp="+mpentry,
 			dataType: 'json',
 			async: false,
