@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 07, 2017 at 06:40 AM
+-- Generation Time: Apr 27, 2018 at 07:39 AM
 -- Server version: 5.6.38
 -- PHP Version: 5.6.30
 
@@ -54,11 +54,11 @@ CREATE TABLE `ngrams` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ngrams.bak`
+-- Table structure for table `ngramsLords`
 --
 
-DROP TABLE IF EXISTS `ngrams.bak`;
-CREATE TABLE `ngrams.bak` (
+DROP TABLE IF EXISTS `ngramsLords`;
+CREATE TABLE `ngramsLords` (
   `ngram` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `year` int(4) NOT NULL,
   `count` int(10) NOT NULL
@@ -67,15 +67,12 @@ CREATE TABLE `ngrams.bak` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ngramsmp`
+-- Table structure for table `updatestring`
 --
 
-DROP TABLE IF EXISTS `ngramsmp`;
-CREATE TABLE `ngramsmp` (
-  `ngram` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `mp` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `year` int(4) NOT NULL,
-  `count` int(10) NOT NULL
+DROP TABLE IF EXISTS `updatestring`;
+CREATE TABLE `updatestring` (
+  `string` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -93,35 +90,14 @@ CREATE TABLE `yearcounts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `yearcounts.bak`
+-- Table structure for table `yearcountsLords`
 --
 
-DROP TABLE IF EXISTS `yearcounts.bak`;
-CREATE TABLE `yearcounts.bak` (
+DROP TABLE IF EXISTS `yearcountsLords`;
+CREATE TABLE `yearcountsLords` (
   `year` int(4) NOT NULL,
   `count` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `yearcountsmp`
---
-
-DROP TABLE IF EXISTS `yearcountsmp`;
-CREATE TABLE `yearcountsmp` (
-  `year` int(4) NOT NULL,
-  `mp` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `count` int(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-DROP TABLE IF EXISTS `updatestring`;
-CREATE TABLE `updatestring` (
-  `string` varchar(100) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-
 
 --
 -- Indexes for dumped tables
@@ -140,15 +116,9 @@ ALTER TABLE `ngrams`
   ADD KEY `idx` (`ngram`,`year`);
 
 --
--- Indexes for table `ngrams.bak`
+-- Indexes for table `ngramsLords`
 --
-ALTER TABLE `ngrams.bak`
-  ADD KEY `idx` (`ngram`,`year`);
-
---
--- Indexes for table `ngramsmp`
---
-ALTER TABLE `ngramsmp`
+ALTER TABLE `ngramsLords`
   ADD KEY `idx` (`ngram`,`year`);
 
 --
@@ -159,7 +129,8 @@ ALTER TABLE `ngramsmp`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8670;COMMIT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9655;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
